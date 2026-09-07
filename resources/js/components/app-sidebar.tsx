@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { BookOpen, Calendar, CalendarDays, FolderGit2, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -23,11 +23,38 @@ export function AppSidebar() {
         ? dashboard(page.props.currentTeam.slug)
         : '/';
 
+    const timetableUrl = page.props.currentTeam
+        ? `/` + page.props.currentTeam.slug + `/timetable`
+        : '#';
+
+    const subjectsUrl = page.props.currentTeam
+        ? `/` + page.props.currentTeam.slug + `/subjects`
+        : '#';
+
+    const calendarUrl = page.props.currentTeam
+        ? `/` + page.props.currentTeam.slug + `/calendar`
+        : '#';
+
     const mainNavItems: NavItem[] = [
         {
             title: 'Dashboard',
             href: dashboardUrl,
             icon: LayoutGrid,
+        },
+        {
+            title: 'Jadwal Pelajaran',
+            href: timetableUrl,
+            icon: Calendar,
+        },
+        {
+            title: 'Mata Kuliah',
+            href: subjectsUrl,
+            icon: BookOpen,
+        },
+        {
+            title: 'Kalender',
+            href: calendarUrl,
+            icon: CalendarDays,
         },
     ];
 

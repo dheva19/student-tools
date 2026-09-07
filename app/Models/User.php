@@ -16,6 +16,8 @@ use Laravel\Fortify\Contracts\PasskeyUser;
 use Laravel\Fortify\PasskeyAuthenticatable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 /**
  * @property int $id
  * @property string $name
@@ -29,12 +31,14 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property int|null $current_team_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $avatar
  * @property-read Team|null $currentTeam
  * @property-read Collection<int, Team> $ownedTeams
  * @property-read Collection<int, Membership> $teamMemberships
  * @property-read Collection<int, Team> $teams
+ * @property-read Student|null $student
  */
-#[Fillable(['name', 'email', 'password', 'current_team_id'])]
+#[Fillable(['name', 'email', 'avatar', 'password', 'current_team_id'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements PasskeyUser
 {
@@ -53,5 +57,13 @@ class User extends Authenticatable implements PasskeyUser
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    /**
+     * @return HasOne<Student, $this>
+     */
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class);
     }
 }

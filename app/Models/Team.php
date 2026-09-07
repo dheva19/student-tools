@@ -96,6 +96,36 @@ class Team extends Model
     }
 
     /**
+     * Get all subjects for this team.
+     *
+     * @return HasMany<Subject, $this>
+     */
+    public function subjects(): HasMany
+    {
+        return $this->hasMany(Subject::class);
+    }
+
+    /**
+     * Get all timetables for this team.
+     *
+     * @return HasMany<Timetable, $this>
+     */
+    public function timetables(): HasMany
+    {
+        return $this->hasMany(Timetable::class);
+    }
+
+    /**
+     * Get all calendar schedules for this team.
+     *
+     * @return HasMany<Schedule, $this>
+     */
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

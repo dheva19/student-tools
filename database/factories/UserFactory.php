@@ -53,6 +53,10 @@ class UserFactory extends Factory
             ]);
 
             $user->switchTeam($team);
+
+            \App\Models\Student::factory()->create([
+                'user_id' => $user->id,
+            ]);
         });
     }
 
